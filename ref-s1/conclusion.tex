@@ -1,0 +1,65 @@
+\chapter{おわりに}\label{sec:conclusion}
+
+% 本論文の概要と特徴
+%In this work, we proposed the method to analyze the reliability of logic circuits.
+%This method is efficient in memory usage by using directed acyclic graphs,
+%and furthermore, Gray Code improves the execution time.
+本研究では，組み合わせ回路における信頼性の評価方法について提案した．
+提案手法は，無閉路有向グラフの利用によって，メモリの使用量を削減し，
+グレイコードによって計算時間の面でも効率化を行った．
+ただし，回路内に再収斂が存在する場合，この手法では正確な確率を計算することはできない．
+そこでさらに，数式として計算し補正する手法と，そのための数式処理システムを提案した．
+
+% 得られた成果
+%The method does not calculate the correct probabilities if the circuit has the recomputation.
+%However, this reconvergence do not heavily affect the results.
+%According to our experiment,
+%the memory usage is less than a ten-thousandth in the best case compared to the existing method
+%and the calculated probabilities have accuracy within about 10\%.
+実験結果の結果，数値として計算を行う提案手法は，
+Probabilistic Transfer Matrix (PTM) を用いた既存手法に比べて，
+メモリの使用量を 2 万分の 1 に抑えられるケースも存在する．
+また，再収斂による誤差は，シミュレーションとの比較によれば，ほとんどのケースで 10\% 以内に抑えられた．
+したがって，信頼性の評価に対して極めて深刻な誤差が発生するとは限らない．
+
+% それから得られる最終結論
+
+%このヒューリスティクスは、再集連を含まない場合に限り、正確な答えを出す。
+%提案手法は、既存の厳密解を得る手法と比べてメモリの面で効率的であり、
+%既存の入力パターンのサンプリングを行う場合と違い、
+%全ての入力パターンに対して評価を行うことができる。
+%あるいは、このヒューリスティクスに対して、
+%さらに入力のサンプリングを行うことも可能である。
+
+% 残された課題
+
+既存手法では，指数的に増加する計算時間に対処するために，
+いくつかの入力をサンプリングしたヒューリスティクスも開発されている．
+提案手法についても，同様のヒューリスティクスが考えられる．
+このとき，\ref{sec:prop:deform:reuse} を考慮すると，グレイコードによって，
+1 ビット違いの連続した入力をサンプリングした方が効率が良い．
+しかし，このサンプリング方法は，ランダムな入力を用いた場合に比べて偏りが生じるかもしれない．
+サンプリングの方法によって，どの程度の偏りが生じるかは，検討すべき課題である．
+
+提案手法は，メモリの使用量を削減したことで，分散コンピューティングにも容易に応用できる．
+並列計算は，一般的にデータの転送時間がボトルネックとなりやすい．
+しかし，提案手法の計算を入力パターンで分割し，ぞれぞれの入力パターンについて同時に計算する手法を考えると，
+グラフ構造や数式のデータ構造を，各ユニットへ配布するだけでベクトル ${\bm s}$ を計算することができる．
+さらに，${\it fidelity}$ の $l_1$-ノルムは，いわゆる並列リダクションで処理できる．
+したがって，式~(\ref{eq:deformed}) の ${\bm v} \cdot {\bm s}$ の計算は，
+MapReduce~\cite{mapreduce} と呼ばれるプログラミングモデルを適用することができると言える．
+ベクトル ${\bm s}$ の計算と，ベクトル ${\bm v}$ との各要素同士の積を求めるまでが Map 操作に相当し，
+それらの合計を求めるのが Reduce 操作に相当する．
+分散コンピューティングで成功したモデルの一つである MapReduce との組み合わせによって，
+設計時における信頼性の計算はさらなる高速化が期待できる．
+
+%今後の課題としては、速度と正確性の改善である。
+%The future study will focus on the speed and accuracy.
+%Using a hash table of the sub-circuits may accelerate this method.
+%By dividing a whole circuit and recomposing, we can omit the calculation of the same sub-circuit.
+%Then the division and composition can solve the reconvergent problem
+%when the input side of the sub-circuits do not contains many reconvergence.
+%In addition, the accuracy of the results may rely on their topological distance.
+%In that case, we may need to consider only gates near the reconvergent point to correct the error
+%because it is anticipated that the effect of a distant reconvergent point would be trivial.
+

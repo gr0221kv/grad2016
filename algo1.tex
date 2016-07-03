@@ -1,0 +1,38 @@
+\IncMargin{1em}
+\removelatexerror
+\begin{algorithm*}[H]
+\caption{提案の組み合わせアルゴリズム}
+\label{algo:ca}
+%\SetAlgoLined
+\SetKwInput{Input}{Input}
+\SetKwInOut{Output}{Output}
+% for some reason, defaults getting overridden in RevTeX
+\SetInd{0.5em}{1em}
+\SetNlSkip{1em}
+\Input{従来のアルゴリズムと同様}
+\Input{$\epsilon_2$: 座標の比較用の値}
+\Input{$\prec$: ソート用の座標の比較算子}
+\Output{従来のアルゴリズムと同様}
+
+\BlankLine
+$ResultSet = \lbrace \rbrace$\\
+\ForEach{
+$Q_j \in \lbrace Q_1, Q_2... , Q_k \rbrace$
+} {
+ $V_j = \lbrace Coord(U_{ji}) \mid U_{ji} \in Q_j \rbrace$\\
+ $Sort(V_j, \prec)$
+}
+$TargetCoord = coord(Q)$\\
+$PromisingCombinations$ = Filter($\lbrace U_j \rbrace, \lbrace V_j \rbrace, \epsilon_2, TargetCoord$) \\
+\ForEach{$(j_1, j_2, ..., j_k) \in PromisingCombinations$} {
+
+\tcc{$\parallel \sum\limits_{i=1}^k V_{ij_{i}} - coord(Q) \parallel \leq \epsilon_2$ が成立}
+
+\If {$D(\prod\limits_{i=1}^k U_{ij_{i}}, Q) \rbrace \leq \epsilon$} {
+	$ResultSet$に${(j_1, j_2, ..., j_n)}$を追加する
+}
+}
+\Return{$ResultSet$}\\
+%\Indm
+\end{algorithm*}
+\DecMargin{1em}

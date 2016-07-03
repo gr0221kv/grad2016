@@ -1,0 +1,166 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                       %
+%  情報処理学会全国大会投稿論文用テンプレートファイル   %
+%                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[9pt,a4paper,twocolumn]{jarticle}
+
+
+\usepackage{ips}
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+%\newcommand{\redout}[1]{\textcolor{red}{#1}}
+%\newcommand{\blueout}[1]{\textcolor{blue}{\bf #1}}
+%\newcommand{\greenout}[1]{\textcolor{green}{\bf #1}}
+%\newcommand{\cyannout}[1]{\textcolor{cyan}{\bf #1}}
+%\newcommand{\magentaout}[1]{\textcolor{magenta}{\bf #1}}
+%\newcommand{\yellowout}[1]{\textcolor{yellow}{\bf #1}}
+
+\newcommand{\redout}[1]{#1}
+%\newcommand{\blueout}[1]{#1}
+%\newcommand{\greenout}[1]{#1}
+%\newcommand{\cyannout}[1]{#1}
+%\newcommand{\magentaout}[1]{#1}
+%\newcommand{\yellowout}[1]{#1}
+
+
+
+\pagestyle{empty}
+%%%%%%    TEXT START    %%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%　ヘッダ　%%%%%%%%%%%%%%%%%%%%%%%%%%
+\twocolumn[
+\begin{center}
+
+\2jtitle{Near-Identityユニタリ行列の座標の性質を用いた}{ユニタリ行列の分解の効率化}
+% 2行の時は \2jtitle{上段}{下段} 
+
+\name{PHAM TRUNG TIEN}\\
+\vspace{1mm}
+学籍番号：6611140060-2
+
+\end{center}
+]
+%%%%%%%%%%%%%%%%%%%%%%%%　   脚注  　%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\etitle{English Title}
+\kecs{pham@ngc.is.ritsumei.ac.jp}
+
+%%%%%%%%%%%%%%%%%%%%%%%%　ここから本文　%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{はじめに}
+ユニタリ行列は量子状態の変更（トランスフォーム）の数学表現であるため、よく研究されている。その研究の中に、近年フォールトトレラント量子ゲートの合成のために、ユニタリ行列の分解（decomposition）問題が注目されている。例として、\cite{SK:2005}-\cite{VK:2013}の研究が挙げられる。多くの分解アルゴリズムはNear-Identityユニタリ行列、即ち単位行列に近いユニタリ行列、をビルディングブロックとして、最後の結果を組み合わせるステージを含む。ただし、Near-Identityユニタリ行列の効率的な組み合わせアルゴリズムは詳しく研究されていない。このような背景で本研究を構想した。
+
+\section{問題定義・研究目的}
+分解結果をビルディングブロックから構成するステージには、Brute-forceの従来のアルゴリズムは全ての行列組み合わせを生成し、検証する必要がある。アルゴリズムの詳細を以下に述べる。
+
+\input{algo.tex}
+なお、$D$は$(d \times d)$行列の距離関数である。$D$の例としては、$D(V, W) \equiv \sqrt{\frac{d - |Trace(V*W^{\dagger})|}{d}}$、量子計算の研究ではよく使われる距離関数である。
+
+上記のアルゴリズムは効率が問題になる。具体的には、アルゴリズムのforeachステップは、繰り返し回数は$n^k$になっている。そのため、計算量、実行時間などの計算資源が$n$と$k$に伴い大幅に増大する。他に、検証用の行列掛け算（アルゴリズムのステップ3）のコストが高いため、計算量の問題は更に深刻になる。本研究の目的は、上記の問題を解決するために、検証される組み合わせ数を削減することである。
+
+\section{提案手法}
+提案手法は、一般のNear-Identityユニタリ行列の数学の性質を利用することで、研究の目的を実現する。次にその性質を紹介し、提案手法の合理性を説明する。最後に提案手法の詳細を述べる。
+
+\subsection{ユニタリ行列の座標化}
+ユニタリ行列は以下の性質を持つため、実数のベクトルで特定することができる。
+\begin{equation}
+\exists  \mathbb{R_*} \subset \mathbb{R}、 全単射 F: SU(d) \longmapsto \mathbb{R_*}^{d^2 - 1}
+\end{equation}
+なお、$SU(d)\equiv\lbrace (d \times d)行列V \mid U \times U^{\dagger} = I \text{ かつ } det(V) = 1 \rbrace $とし、$(d \times d)$の特殊ユニタリの集合である。
+
+$F$はユニタリ行列、エルミート行列、内積空間の知識を用いて求められるが、詳細は本原稿では省略する。なお、簡単のために、以下では$U \in SU(d)$に対して、$F(U)$は$coord(U)$と表記する。
+
+\subsection{Near-Identityユニタリ行列の座標の特徴}
+次の条件
+\begin{enumerate}
+\item $U_1, U_2 \in SU(d)$
+\item $D(U_1, I) < \epsilon,\text{ } D(U_2,I) < \epsilon \mid \epsilon \approx 0 $
+\end{enumerate}
+
+を満たすならば下記の式が保証できる
+\begin{enumerate}
+\item $\parallel coord(U_1 \times U_2) - (coord(U1) + coord(U_2)) \parallel = O(\epsilon ^ 2)$
+\item $ D(U_1 \times U_2, F^{-1}(coord(U1) + coord(U_2)) = O(\epsilon ^ 2)$
+\end{enumerate}
+直感的に言うと、２つのNear-Identityユニタリ行列の積の座標は、その２つの行列の座標の和に近い、という意味の性質である。
+
+\subsection{提案手法の概要}
+上記の性質を考慮の上、以下の改善案が考えられる
+\begin{enumerate}
+\item 全ての組み合わせを検証する必要がない。検証の対象は「要素行列の座標の合計がターゲット行列の座標に近い」という条件(以下は条件1と表記する)\label{txt:cond1}を満たす組み合わせのみにする。トレード・オフとしては、ある程度の誤差と座標化作業のオーバーヘッドである。実装の時、誤差の許容度を設定引数としてプログラムに与えるようにする。
+\item 条件\ref{txt:cond1}を満たす組み合わせを探すには、全ての組み合わせを生成し、チェックするわけではない。全ての$\lbrace Q_k\rbrace$を事前に座標化し、ソートすることで、構成要素行列の座標から明らかに離れる場合を検出して、排除することが可能である。主なアイデアは動的プログラミングの適用であるが、詳細は本原稿では省略する。トレード・オフとしては、座標セットのソートのオーバーヘッドである。
+\end{enumerate}
+
+\subsection{提案手法の実現するアルゴリズム}
+\input{algo1.tex}
+
+\section{実験結果}
+分解アルゴリズムのベンチマークとしてよく使われる($2 \times 2$)ユニタリ行列$Q$をターゲットとして、提案手法の評価を行っている。
+
+ターゲット行列$Q=e^{\textstyle{\frac{-\imath \times \Pi}{256}} \times \left[ {\begin{array}{*{3}c}
+   0 & 1  \\
+   1 & 0  \\
+ \end{array} } \right]}$
+
+精度$\epsilon=3e-2$
+
+\begin{table}[h]
+\label{tab:eval1}
+\begin{tabulary}{1.17\linewidth}{|L|L|C|C|C|C|C|}
+  \hline
+  \textit{n} & \textit{k} & 誤差許容度 & E0 & E1 & E2 & E3 \\ \hline
+ 30 & 4 & 低 & $223123$ & $62.45\%$ & $85.81\%$ & Yes\\ \hline
+ 30 & 4 & 中 & $224583$ & $36.42\%$ & $66.48\%$ & Yes\\ \hline
+ 40 & 4 & 中 & $657556$ & $27.63\%$ & $42.95\%$ & Yes\\ \hline
+ 40 & 4 & 高 & $657535$ & $14.06\%$ & $22.35\%$ & No\\ \hline
+\end{tabulary}
+\caption{評価用の実験データ} 
+\end{table}
+
+なお、実験データを記載する表１の中の記号の意味の説明は以下に通りである。\\
+
+\begin{tabulary}{\linewidth}{|l|L|}
+  \hline
+  E0 & 既存の実行時間(ms)  \\ \hline
+  E1 & 提案の実行時間（既存の実行時間$\%$）  \\ \hline
+  E2 & 提案の再現率（$\%$）  \\ \hline
+  E3 & 最良結果(ターゲットへの距離が最も近いもの)を発見したかどうか (YES/No) \\ \hline
+\end{tabulary}
+
+\section{まとめと展望}
+本稿ではNear-Identityユニタリ行列の座標の性質を用いたユニタリ行列の分解手法について検討した。予備実験の結果からすると、従来の手法の効率に比べ、提案手法が少し優れていると考えられる。一方、提案手法の制限、問題点もある程度分かっている。後半年間で、次のことを行う計画である。($4\times4$)ユニタリ行列の分解を目標として実験し、結果を現在の実験結果を共に分析することで提案手法を厳格に評価する。他に今の実装ソースコードを改造し、並列化などのテクニックを適用し、効率的に提案手法を実装する。最後に、理論の研究を継続し、より効率な手法を作成する目標も目指す。
+
+\begin{thebibliography}{9}
+
+\bibitem{SK:2005}
+C.~M. Dawson and M.~A. Nielsen.
+\newblock The {S}olovay-{K}itaev algorithm.
+\newblock {\em Quantum Information and Computation}, 6(1):81--95, 2006.
+
+\bibitem{MA:2012}
+Matthew Amy, Dmitri Maslov, Michele Mosca, and Martin Roetteler
+\newblock A meet-in-the-middle algorithm for fast synthesis of depth-optimal quantum circuits.
+\newblock {\em arXiv:1206.0758}, 2012.
+
+\bibitem{VK:2013}
+Vadym Kliuchnikov
+\newblock Synthesis of unitaries with Clifford+T circuits.
+\newblock {\tt arXiv:1306.3200}, 2013.
+
+\end{thebibliography}
+
+\end{document}

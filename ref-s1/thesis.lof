@@ -1,0 +1,13 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 組み合わせ回路の例}}{4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces ADD によって行列を表現する例}}{6}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 等価な節点の共有}}{7}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 冗長な節点の削除}}{7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 4入力2出力の回路ににおける入力パターンが変更した際の再計算}}{12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 2 箇所の再収斂によって正確な結果が得られない例}}{12}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 再収斂が 1 箇所存在するケース}}{13}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 図\nobreakspace {}3.2\relax の回路を分割する例}}{17}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

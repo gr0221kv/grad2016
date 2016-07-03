@@ -1,0 +1,70 @@
+\begin{thebibliography}{10}
+
+\bibitem{Baumann:2005:SEA:1069593.1069707}
+Robert Baumann.
+\newblock Soft errors in advanced computer systems.
+\newblock {\em IEEE Des. Test}, Vol.~22, No.~3, pp. 258--266, May 2005.
+
+\bibitem{Krishnaswamy:2008:PTM:1297666.1297674}
+Smita Krishnaswamy, George~F. Viamontes, Igor~L. Markov, and John~P. Hayes.
+\newblock Probabilistic transfer matrices in symbolic reliability analysis of
+  logic circuits.
+\newblock {\em ACM Trans. Des. Autom. Electron. Syst.}, Vol.~13, No.~1, pp.
+  8:1--8:35, February 2008.
+
+\bibitem{松永裕介:2008-09-29}
+Yusuke Matsunaga.
+\newblock On exact estimation of logic masking effect for soft erros on
+  combinational circuits.
+\newblock {\em IEICE Technical Report. Image Engineering.}, Vol. 108, No. 229,
+  pp. 53--58, sep 2008.
+
+\bibitem{580054}
+R.I. Bahar, E.A. Frohm, C.M. Gaona, G.D. Hachtel, E.~Macii, A.~Pardo, and
+  F.~Somenzi.
+\newblock Algebraic decision diagrams and their applications.
+\newblock In {\em Computer-Aided Design, 1993. ICCAD-93. Digest of Technical
+  Papers., 1993 IEEE/ACM International Conference on}, pp. 188--191, 1993.
+
+\bibitem{BLTJ:BLTJ1585}
+C.~Y. Lee.
+\newblock Representation of switching circuits by binary-decision programs.
+\newblock {\em Bell System Technical Journal}, Vol.~38, No.~4, pp. 985--999,
+  1959.
+
+\bibitem{zdd-app}
+Shin-ichi Minato.
+\newblock Zero-suppressed bdds and their applications.
+\newblock {\em International Journal on Software Tools for Technology
+  Transfer}, Vol.~3, No.~2, pp. 156--170, 2001.
+
+\bibitem{knuth2014art}
+D.E. Knuth.
+\newblock {\em The Art of Computer Programming, Volume 4A: Combinatorial
+  Algorithms}, p. 273.
+\newblock No. Part 1. Pearson Education, 2014.
+
+\bibitem{LGSynth93}
+McElvain Ken and Graphics Mentor.
+\newblock {LGSynth93 Benchmark Set: Version 4.0 ACM/SIGDA benchmarks (archived
+  by Franc Brglez)}.
+\newblock \url{http://www.cbl.ncsu.edu:16080/benchmarks/LGSynth93/}.
+
+\bibitem{Support}
+Intel Corporation.
+\newblock Support for processors.
+\newblock \url{http://www.intel.com/p/en_US/support/processors}.
+
+\bibitem{GiNaC}
+Christian Bauer, Alexander Frink, and Richard Kreckel.
+\newblock Introduction to the \mbox{GiNaC} framework for symbolic computation
+  within the c++ programming language.
+\newblock {\em J. Symb. Comput.}, Vol.~33, No.~1, pp. 1--12, 2002.
+
+\bibitem{mapreduce}
+Jeffrey Dean and Sanjay Ghemawat.
+\newblock Mapreduce: simplified data processing on large clusters.
+\newblock  OSDI’04 Proceedings of the 6th Conference on Symposium on Operating
+  Systems Design and Implementation. USENIX Association, 2004.
+
+\end{thebibliography}

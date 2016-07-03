@@ -1,0 +1,160 @@
+\chapter{実験結果と考察}\label{sec:experiment}
+
+\begin{table}[tbp]
+  \centering
+  \caption{PTM を用いた既存手法との計算時間とメモリ使用量の比較}
+  \begin{tabular}{l|r||r|r|r|r|r|r} \Hline
+     &  & \multicolumn{3}{|c|}{時間 (秒)} & \multicolumn{3}{|c}{メモリ (MB)} \\ \cline{3-8}
+      \multicolumn{1}{c|}{回路} & \multicolumn{1}{|c||}{入力} & \multicolumn{1}{|c|}{PTM} & \multicolumn{1}{|c|}{提案} & \multicolumn{1}{|c|}{比率} & \multicolumn{1}{|c|}{PTM} & \multicolumn{1}{|c|}{提案} & \multicolumn{1}{|c}{比率} \\ \Hline
+    C17 & 5 & 0.212 & 0.000 & 212.0 & 0.000 & 0.003 & 0.3 \\ \hline
+    decod & 5 & 5.132 & 0.000 & 5132.0 & 1.02 & 0.007 & 145.7 \\ \hline
+    xor5 & 5 & 3.589 & 0.000 & 3589.0 & 0.227 & 0.008 & 28.4 \\ \hline
+    z4ml & 7 & 3.849 & 0.006 & 641.5 & 1.004 & 0.015 & 66.9 \\ \hline
+    9symml & 9 & 89.145 & 0.035 & 2547.0 & 6.668 & 0.025 & 266.7 \\ \hline
+    x2 & 10 & 11.015 & 0.006 & 1835.8 & 2.344 & 0.008 & 293.0 \\ \hline
+    cu & 14 & 23.7 & 0.195 & 121.5 & 2.215 & 0.013 & 170.4 \\ \hline
+    parity & 16 & 1.06 & 0.309 & 3.4 & 0.113 & 0.015 & 7.5 \\ \hline
+    pm1 & 16 & 72.384 & 0.168 & 430.9 & 3.734 & 0.016 & 233.4 \\ \hline
+    pcle & 19 & 28.81 & 4.411 & 6.5 & 3.309 & 0.014 & 236.4 \\ \hline
+    cc & 21 & 57.4 & 18.326 & 3.1 & 4.839 & 0.019 & 254.7 \\ \hline
+    mux & 21 & 18.052 & 22.765 & 0.8 & 2.051 & 0.017 & 120.6 \\ \hline
+    c8 & 28 & 35559.5 & 5538.1 & 6.4 & 930.023 & 0.041 & 22683.5 \\ \Hline
+  \end{tabular}
+  \label{tb:compare}
+\end{table}
+%第~\ref{sec:prop} 章で提案した手法についてプログラムを実装し，以下の手順で実験を行った．
+%Table~\ref{tb:experiment} shows a comparison of the CPU time and memory usage for the PTM-based
+%method~\cite{Krishnaswamy:2008:PTM:1297666.1297674} and our proposed method.
+\ref{sec:prop:deform}~節で提案した手法についてプログラムを実装し，実験を行った．
+表~\ref{tb:compare} に PTM を用いた既存手法~\cite{Krishnaswamy:2008:PTM:1297666.1297674} との比較結果を示す．
+表の各列は，以下のように定義される．
+\begin{description}
+  \setlength{\parskip}{0cm}
+  \setlength{\itemsep}{0.0cm}
+  \item[回路] ベンチマーク回路のファイル名
+  \item[入力] 外部入力の数 $|{\it PI}|$
+  \item[時間] 計算時間（秒）
+  \item[メモリ] メモリの使用量 (MB)
+  \item[PTM] 計算順序を改善した PTM の結果
+  \item[提案] グレイコードを用いて改善した提案手法の結果
+  \item[比率] $(\mbox{PTM の結果}) / (\mbox{提案手法の結果})$
+\end{description}
+なお， 0.0005 に満たない値は，0.000 として表記している．
+また，比率の計算において結果が 0.000 の場合は， 0.001 として計算している．
+
+%The benchmark circuits were taken from LGSynth'93 Benchmark~\cite{LGSynth93}
+本実験のベンチマーク回路には Berkeley Logic Interchange Format (BLIF) フォーマットで記述された
+LGSynth'93~\cite{LGSynth93} に含まれる組み合わせ回路を用いており，
+%and we assumed that the gates flip by the probability of ${\it err(g)} = 0.05$.
+各ゲートが反転する確率は，${\it err(g)} = 0.05$ を設定した．
+\begin{table}
+  \centering
+  \caption{実験環境}
+  \begin{tabular}{l|l} \Hline
+    CPU & Intel\textsuperscript{\textregistered} Core\textsuperscript{TM} i5-3570 CPU (3.40GHz) \\
+    メモリ & 8 GB \\
+    OS & Linux (Fedora 20) \\
+    言語 & C++ \\
+    コンパイラ & g++ 4.8.3 \\ \Hline
+  \end{tabular}
+  \label{tb:env}
+\end{table}
+%We implemented the proposed method in C++ (g++ 4.8.3), the tests were performed
+%on an Intel\textsuperscript{\textregistered} Core\textsuperscript{TM} i5-3570 CPU (3.40GHz)
+%with 8 GB RAM and running on Fedora 20.
+提案手法の実験環境は，表~\ref{tb:env} の通りである．
+%The experimental results by PTM-based method~\cite{Krishnaswamy:2008:PTM:1297666.1297674}
+%were conducted on a Pentium 4 Xeon processor running at 2GHz.
+PTM を用いた既存手法の実験結果は，Pentium 4 Xeon (2GHz) を用いている．
+%Thus the proposed method may get an advantage such that our CPU may be 100 times faster
+%if we consider the CPU's FLOPS comparison~\cite{Support}.
+したがって，CPU の FLOPS~\cite{Support} の差を考慮すると，
+計算時間が 100 倍以上改善されたケースについては，提案手法の方が十分に優位であると考えられる．
+
+%The memory usage is much fewer than the existing method
+%since the memory usage of the proposed method is proportional to the number of nodes.
+提案手法のメモリ使用量はゲート数に比例するため，既存手法に比べて少なくなっている．
+%Considering the difference, we should consider that our method is slower that the PTM-based previous method in some cases.
+%This is because the PTM-based method can avoid calculation of the same sub-circuits implicitly.
+一方，計算時間が大きく改善されないのは，既存手法が ADD によって同一の部分回路の再計算を回避しているのに対し，
+提案手法は，外部入力に与えられるの入力のパターン数がボトルネックになっているからであると考えられる．
+
+\begin{table}[tb]
+  \centering
+  \caption{計算時間の改善}
+  \begin{tabular}{l||r|r|r} \Hline
+    \multicolumn{1}{c||}{回路} & \multicolumn{1}{|c|}{改善なし} & \multicolumn{1}{|c|}{Dist} & \multicolumn{1}{|c}{Dist-Gray} \\ \Hline
+    xor5   & 0.000 & 0.001 &0.000 \\ \hline
+    9symml & 0.065 & 0.035 & 0.035 \\ \hline
+    x2 & 0.024 & 0.018 & 0.006 \\ \hline
+    cu & 0.529 & 0.315 & 0.195 \\ \hline
+    parity & 1.45 & 0.456 & 0.309 \\ \hline
+    pm1 & 2.034 & 0.339 & 0.168 \\ \hline
+    pcle & 14.055 & 5.862 & 4.411 \\ \hline
+    cc & 72.297 & 32.845 & 18.326 \\ \hline
+    mux & 103.562 & 31.852 & 22.765 \\ \hline
+    c8 & 30990.6 & 8417.5 & 5538.1 \\ \Hline
+  \end{tabular}
+  \label{tb:improve}
+\end{table}
+
+\begin{table}[tb]
+  \centering
+  \caption{正確性の検証}
+  \begin{tabular}{l||r|r} \Hline
+    \multicolumn{1}{c||}{回路} & \multicolumn{1}{|c|}{絶対差の平均} & \multicolumn{1}{|c}{絶対差の最大} \\ \Hline
+    C17    & 0.034 & 0.091 \\ \hline
+    decod  & 0.011 & 0.028 \\ \hline
+    xor5   & 0.011 & 0.030 \\ \hline
+    z4ml   & 0.006 & 0.021 \\ \hline
+    9symml & 0.010 & 0.035 \\ \hline
+    x2     & 0.033 & 0.130 \\ \hline
+    cu     & 0.036 & 0.090 \\ \hline
+    parity & 0.043 & 0.111 \\ \hline
+    pm1    & 0.011 & 0.060 \\ \hline
+    pcle   & 0.021 & 0.081 \\ \Hline
+  \end{tabular}
+  \label{tb:accuracy}
+\end{table}
+
+表~\ref{tb:improve} は，\ref{sec:prop:deform}~節の手法について，計算時間の改善を行った結果を示している．
+単位は全て秒で表されている．
+``改善なし'' は，Algorithm~\ref{alg:failprob} を用いて計算した結果である．
+``Dist'' は，異なる入力間での計算結果の再利用を行った結果で，
+``Dist-Gray'' は，さらにグレイコードを用いて再計算を開始するノードを減らした結果である．
+``Dist-Gray'' では，実験を行ったほぼ全てのケースで計算時間が改善されている．
+xor5 の ``Dist'' が改善しない場合より遅いのは，トポロジカル順序の計算がオーバーヘッドになっているからであると考えられる．
+
+%Table~\ref{tb:accuracy} shows a result of inspecting the accuracy.
+表~\ref{tb:accuracy} は，\ref{sec:prop:deform}~節の手法について，正確性の検証を行った結果である．
+%We compare the method with the results of 1000 times of the simulations using pseudorandom numbers.
+疑似乱数を用いて，1000 回のシミュレーションを行った結果と，提案手法によって計算した確率を比較している．
+%\textbf{``Diff Avg.''} represents the mean value of the differences of ${\bm s}$
+``絶対差の平均'' の列は各パターンごとの確率 ${\bm s}$ の絶対差の平均値である．
+%and \textbf{``Diff Max''} represents the maximum value of of the absolute differences of ${\bm s}$.
+また，``絶対差の最大'' は，${\bm s}$ の絶対差の最大値を示している．
+%From the result, we can observe the difference is less than 10\% in most cases in our experiments.
+この結果から，今回実験を行ったほとんどのケースで，10\% 以内の誤差の範囲で計算できていることがわかる．
+%However, we should consider how to compensate the error as our future work.
+%TODO 結果について
+
+数式を用いた手法は，現在までの実装では，全てのゲートに記号を割り当て，
+既存の数式処理システムである GiNaC~\cite{GiNaC} を用いている．
+この実装の場合は，非常に小さなケースでしか計算することはできなかった．
+既存の数式処理システムを用いる場合，{\bf 補正ルール 3} より，
+回路中の全ての $g$ について $P(g) (1 - P(g_i))$ で割った剰余を求めればよい．
+しかし，計算中に補正ルールを適用しないため，
+矛盾した 2 個の状態を保持しながら計算を行うことになってしまう．
+後に再収斂するゲート $g$ が $P(g)$ の確率で 1 を出力する場合，
+補正ルールを適用しない計算では，一方のルートによって計算された $x P(g)$ と，
+もう一方のルートによって計算された $y P(g)$ が発生する．
+実際には，$P(g), x, y$ は，多項式で表されている．
+したがって，項の数は再収斂によって指数的に増加し，
+現実的な時間で剰余を求めることができなかったと考えられる．
+
+\ref{sec:prop:exp}~節の手法では，のちに再收斂が発生するファンアウトポイントを 1 つの記号で保持するため，
+全てのゲートに記号を割り当てた場合のような指数的な増加は発生しない．
+さらに， {\bf 補正ルール 1} を計算中に適用することによって項の数が減少するため，
+計算時間やメモリの使用量の現象も見込むことができる．
+また，数式に対しても，\ref{sec:prop:deform:reuse} と同様に，
+異なる入力間のでの計算結果の再利用ができる可能性がある．

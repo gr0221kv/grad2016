@@ -1,0 +1,61 @@
+\documentclass[a4j,12pt,dvipdfmx]{jreport}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. texの冒頭に\usepackage{NGC}と記述してください．
+%
+% 2. 文字列の色替えをキャンセルしたい(文字を黒くしたい)場合は，
+%    NGC.styの中身を編集してください．
+%    編集手順はNGC.styに書いてあります．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{NGC}
+\usepackage{algorithmic,algorithm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{todonotes}
+\usepackage{url}
+
+% 図・表がページ全体を占めても良い割合を少し増やす
+\renewcommand{\topfraction}{0.7} % 上部で占める最大の割合
+\renewcommand{\bottomfraction}{0.7} % 下部で占める最大の割合
+\renewcommand{\textfraction}{0.3} % テキストが占める最小割合
+\renewcommand{\floatpagefraction}{0.7} % 単独になるときの最小割合
+
+\renewcommand{\arraystretch}{.9}
+
+\title{ユニタリ行列の座標化に基づいた量子ゲートの分解の効率化}
+\author{PHAM TRUNG TIEN}
+\stdnum{6611140060-2}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\thispagestyle{empty}
+\pagenumbering{roman}
+\setcounter{page}{1}
+\input{abstract}
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+\pagenumbering{arabic}
+\input{intro}
+\input{background}
+\input{problem_def}
+\input{proposal}
+\input{experiment}
+\input{conclusion}
+\input{acknowledgment}
+\input{references}
+
+\appendix
+
+\end{document}
+

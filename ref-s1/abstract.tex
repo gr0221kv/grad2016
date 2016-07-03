@@ -1,0 +1,37 @@
+\chapter*{内容梗概}
+
+
+%It has been anticipated that a so-called "soft error"
+%causes serious problems even in a combinatorial logic circuits consisting of the near-future generation of transistors.
+近い将来，トランジスタによって構成される組み合わせ回路では，
+動作中に発生する可能性のあるソフトエラーが深刻な問題となることが予想されている．
+%Thus it is very important to develop efficient methods for the reliability analysis of logic circuits.
+したがって，論理回路の信頼性を効率的に評価する手法の開発は，
+回路の設計において非常に重要となってきている．
+
+%There is an efficient reliability analysis method based on Probabilistic Transfer Matrix (PTM),
+論理回路の信頼性を評価するための既存の手法としては，Probabilistic Transfer Matrix (PTM) を用いた手法が存在する．
+%but the necessary peak memory would be very huge in the worst case.
+しかし，この手法は，最悪の場合，非常に大きなメモリが必要となる．
+%This paper proposes another approach that uses much less memory even in the worst case.
+そこで，本研究では，既存手法とは異なるアプローチを用いてメモリの使用量を削減する．
+%Our method carefully considers to avoid essentially the same computation
+%as much as possible to reduce the computational time.
+\cyannout{このアルゴリズムは，各入力に対して出力が正しく得られる確率を用いて，ゲート数に比例した空間計算量で計算する．
+計算途中に発生する同じ計算を減らすことによって，計算時間を減らす工夫も行われている．}
+
+%Our preliminary experimental results show that the memory usage would be less than a ten-thousandth
+%in the best case compared to the state-of-the-art PTM-based simulator.
+本手法は，最新の PTM を用いた手法の結果と比較実験を行った．
+その結果，最も効果的なケースでは，メモリの使用量を 2 万分の 1 程度に削減することに成功した．
+
+\ifnum\NGCcolor=0
+\section*{修正色}
+
+\begin{itemize}
+  \item \redout{先生}
+  \item \blueout{ikさん}
+  \item \greenout{TKGさん}
+  \item \cyannout{自分}
+\end{itemize}
+\fi
